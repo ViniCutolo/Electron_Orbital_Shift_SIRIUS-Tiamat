@@ -318,8 +318,8 @@ def analise_catalog(events: Catalog, catalog: str, plotting: bool = False):
     for name, table in superficial_waves:
         for idx, row in table.iterrows():
             phase = row["type"]
-            takeoff_angle = "Unknown"
-            incident_angle = "Unknown"
+            takeoff_angle = "270"
+            incident_angle = "0"
 
             group_velocity = row["U"]
             earth_radius = 6371

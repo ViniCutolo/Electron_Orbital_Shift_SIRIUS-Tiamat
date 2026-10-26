@@ -1,5 +1,7 @@
 import os
+import warnings
 from datetime import UTC, datetime
+from zipfile import BadZipFile
 
 import arrival_time as arrt
 import matplotlib.pyplot as plt
@@ -7,12 +9,39 @@ import numpy as np
 import obspy.core.utcdatetime as utc
 import pandas as pd
 import plotly.graph_objects as go
+from association_v2 import (
+    _to_seconds,
+    calculate_associations_random,
+    event_blocks,
+    null_calibration,
+)
 from fast_score import fast_association_calculator
 from obspy import taup
 from obspy.clients.fdsn.header import FDSNNoDataException
+from scipy.signal import butter, hilbert, sosfiltfilt
+
+warnings.filterwarnings("error", category=RuntimeWarning)
 
 
-def change_amplitude(data_seism: pd.DataFrame, THRESHOLD=0):
+def normalized_envelope(t, val, fmin, fmax, noise_window_s=4 * 3600):
+    dt = np.median(np.diff(t))
+    fs = 1.0 / dt
+
+    x = np.asarray(val, float)
+    x = x - np.nanmedian(x)
+
+    sos = butter(4, [fmin, fmax], btype="band", fs=fs, output="sos")
+    env = np.abs(hilbert(sosfiltfilt(sos, x)))
+
+    n = max(int(noise_window_s / dt), 3)
+    noise = (
+        pd.Series(env).rolling(n, center=True, min_periods=n // 4).median().to_numpy()
+    )
+
+    return env / noise, noise
+
+
+def change_amplitude(data_seism: pd.DataFrame, frequencies: tuple, THRESHOLD=3):
     """
     Function that computes the amplitude variation of a seismic signal and identifies significant changes
 
@@ -27,19 +56,11 @@ def change_amplitude(data_seism: pd.DataFrame, THRESHOLD=0):
     - A dataframe containing the amplitude variation between consecutive samples, the noise-reduced variation, the time interval between samples, and boolean flags indicating whether each variation was detected as a significant change
     """
 
-    seism_list = np.array(data_seism["val"].diff().to_list())
+    seism_list = np.array(data_seism["val"].to_list())
     temporal_list = data_seism["secs"].to_list()
 
-    # Noise reduction
-    baseline = np.mean(seism_list[1:])
-
-    residual_seism = seism_list  # - baseline
-    noise_amplitude = np.nanpercentile(abs(residual_seism), 90) * 0.9
-
-    treated_change = np.where(
-        (residual_seism > -noise_amplitude) & (residual_seism < noise_amplitude),
-        0,
-        residual_seism,
+    treated_change, noise = normalized_envelope(
+        temporal_list, seism_list, frequencies[0], frequencies[1]
     )
 
     change_detected = [float("NaN")]
@@ -68,7 +89,7 @@ def change_amplitude(data_seism: pd.DataFrame, THRESHOLD=0):
         }
     )
 
-    return df
+    return df, noise
 
 
 def detecting_earthquake(
@@ -76,7 +97,7 @@ def detecting_earthquake(
     intensity_table: pd.DataFrame,
     time_data: pd.DataFrame,
     event_data: pd.DataFrame,
-    sensibility=18,
+    sensibility=10.2,
 ):
     """
     Function that evaluates the statistical association between predicted
@@ -172,11 +193,15 @@ def detecting_earthquake(
                 if available_earthquakes["phase"].to_list() != []
                 else "None"
             )
-            mean_probable_activity_order = np.mean(
-                probable_earthquakes["activity_order"].to_list()
+            mean_probable_activity_order = (
+                np.mean(probable_earthquakes["activity_order"].to_list())
+                if not probable_earthquakes["activity_order"].empty
+                else np.nan
             )
-            mean_event_activity_order = np.mean(
-                available_earthquakes["activity_order"].to_list()
+            mean_event_activity_order = (
+                np.mean(available_earthquakes["activity_order"].to_list())
+                if not available_earthquakes["activity_order"].empty
+                else np.nan
             )
 
             detection_table.loc[len(detection_table)] = [
@@ -203,26 +228,19 @@ def detecting_earthquake(
         }
     )
 
-    association_table = fast_association_calculator(
+    association_table = calculate_associations_random(
         diff_panel,
         time_data,
-        sensibility=sensibility,
-        time_shift=np.arange(-10, 10) * 18,
-        cobertura_fixa=False,
     )
 
-    global_scores = association_table[association_table["event_id"] == "all"]
-
-    temporal_association_score = global_scores["temporal_association_score"].iloc[-1]
-
-    return detection_table, temporal_association_score, association_table
+    return detection_table, association_table
 
 
 def correlations(
     diff_content_panel: np.asarray,
     time_data: pd.DataFrame,
     event_data: pd.DataFrame,
-    sensibility=18,
+    sensibility=10.2,
 ):
     """
     Function that evaluates the activity intensity associated with
@@ -529,12 +547,26 @@ def plot_seismo(
 
     u_max = np.max(
         np.concatenate(
-            [df_Z["val"].to_list(), df_X["val"].to_list(), df_Y["val"].to_list()]
+            [
+                df_Z["val"].to_list(),
+                df_X["val"].to_list(),
+                df_Y["val"].to_list(),
+                diff_df_Z["treated_change"].to_list(),
+                diff_df_X["treated_change"].to_list(),
+                diff_df_Y["treated_change"].to_list(),
+            ]
         )
     )
     u_min = np.min(
         np.concatenate(
-            [df_Z["val"].to_list(), df_X["val"].to_list(), df_Y["val"].to_list()]
+            [
+                df_Z["val"].to_list(),
+                df_X["val"].to_list(),
+                df_Y["val"].to_list(),
+                diff_df_Z["treated_change"].to_list(),
+                diff_df_X["treated_change"].to_list(),
+                diff_df_Y["treated_change"].to_list(),
+            ]
         )
     )
 
@@ -824,25 +856,39 @@ def save_excel(
         model_table.to_excel(writer, sheet_name="model table", index=False)
 
 
-def generate_model_table(final_panel: np.asarray):
+def generate_model_table(final_panel: np.asarray, noise):
+
+    first_time = final_panel[0][0]["secs"].to_list()[0]
 
     intensity_table = final_panel[-3]
     association_table = final_panel[-2]
     event_data = final_panel[-1]
+    time_data = final_panel[-5]
+
+    label = ["Z", "X", "Y"]
 
     model_table = pd.DataFrame(
         {
             "event_id": [],
             "phase": [],
             "depth": [],
+            "incident_angle": [],
+            "takeoff_angle": [],
+            "log_depth": [],
             "axis": [],
+            "axis_noise": [],
             "activity_order": [],
             "magnitude": [],
+            "expected_amp": [],
             "magnitude_type": [],
             "epicenter_distance": [],
+            "log_dist": [],
             "first_arrival": [],
             "last_arrival": [],
+            "ray_param": [],
             "score": [],
+            "p_value": [],
+            "effect_z": [],
         }
     )
 
@@ -853,14 +899,35 @@ def generate_model_table(final_panel: np.asarray):
         phase = score_row["phase"]
         axis = score_row["axis"]
         score = score_row["temporal_association_score"]
+        p_value = score_row["p_value"]
+        effect_z = score_row["effect_z"]
+
+        origin_time = event_data[event_data["event_id"] == name]["origin_time"].iloc[0]
 
         n_intensity_table = intensity_table[
-            (intensity_table["event_id"] == name) & (intensity_table["phase"] == phase)
+            (intensity_table["event_id"] == name)
+            & (intensity_table["phase"] == phase)
+            & (intensity_table["axis"] == axis)
         ]
 
         activity_order = n_intensity_table["activity_order"].iloc[0]
         first_arrival = n_intensity_table["first_arrival"].iloc[0]
         last_arrival = n_intensity_table["last_arrival"].iloc[0]
+
+        n_time_data = time_data[
+            (time_data["phase"] == phase) & (time_data["event_id"] == name)
+        ]
+
+        ray_param = n_time_data["ray_parameter"]
+        takeoff = n_time_data["takeoff_angle"]
+        incident = n_time_data["incidente_angle"]
+
+        try:
+            ray_param = ray_param.iloc[0]
+            takeoff = takeoff.iloc[0]
+            incident = incident.iloc[0]
+        except ValueError:
+            pass
 
         magnitude = event_data[event_data["event_id"] == name]["magnitude"].iloc[0]
         magnitude_type = event_data[event_data["event_id"] == name][
@@ -871,21 +938,50 @@ def generate_model_table(final_panel: np.asarray):
         ].iloc[0]
         depth = event_data[event_data["event_id"] == name]["depth"].iloc[0]
 
+        log_dist = np.log10(6371 * (2 * np.pi / 180) * epicenter_distance)
+        log_depth = np.log(1 + depth * 1000)
+
+        axis_noise = noise[label.index(axis)][int(origin_time - first_time)]
+
+        expected_amp = magnitude - 1.66 * np.log10(epicenter_distance)
+
         model_table.loc[len(model_table)] = [
             name,
             phase,
             depth,
+            incident,
+            takeoff,
+            log_depth,
             axis,
+            axis_noise,
             activity_order,
             magnitude,
+            expected_amp,
             magnitude_type,
             epicenter_distance,
+            log_dist,
             first_arrival,
             last_arrival,
+            ray_param,
             score,
+            p_value,
+            effect_z,
         ]
 
     return model_table
+
+
+def minmax_frequency(content_panel, time_data):
+    t0 = np.asarray([s.timestamp for s in content_panel[0]["secs"]], float)
+    f_max_hz = 0.9 * 0.5 / np.median(np.diff(t0))
+    freq_hz = pd.to_numeric(time_data["frequency"], errors="coerce") / 1000.0
+    surface = time_data["phase"].isin(["love", "rayleigh"])
+
+    f_list = freq_hz[surface & (freq_hz <= f_max_hz)].to_list()
+    if not f_list:
+        print(f"Nenhuma onda superficial observável em {path}")
+        return []
+    return min(f_list), max(f_list)
 
 
 def create_analysis_panel(
@@ -929,12 +1025,21 @@ def create_analysis_panel(
 
     content_panel = [df_Z, df_X, df_Y]
     content_panel = [table_treatment(df, -3) for df in content_panel]
-    diff_content_panel = [change_amplitude(df).dropna() for df in content_panel]
-    regions_content_panel = [group_dynamic(df) for df in diff_content_panel]
 
     event_data, time_data = load_catalog(content_panel[0])
 
     if event_data is not None and time_data is not None:
+        fmin, fmax = minmax_frequency(content_panel, time_data)
+
+        diff_content_panel_surface, noise_surface = zip(
+            *[change_amplitude(df, (fmin, fmax)) for df in content_panel]
+        )
+        diff_content_panel_surface = [df.dropna() for df in diff_content_panel_surface]
+
+        regions_content_panel_surface = [
+            group_dynamic(df) for df in diff_content_panel_surface
+        ]
+
         start = content_panel[0]["secs"].to_list()[0]
         end = content_panel[0]["secs"].to_list()[-1]
         time_data = time_data[
@@ -942,95 +1047,212 @@ def create_analysis_panel(
         ]
 
         event_data = event_data[event_data["event_id"].isin(time_data["event_id"])]
-
-        intensity_table = correlations(diff_content_panel, time_data, event_data)
-        detection_table, temporal_association_score, association_table = (
-            detecting_earthquake(
-                diff_content_panel, intensity_table, time_data, event_data
-            )
+        surface_data = time_data[time_data["phase"].isin(["love", "rayleigh"])]
+        intensity_table_surface = correlations(
+            diff_content_panel_surface, surface_data, event_data
+        )
+        detection_table_surface, association_table_surface = detecting_earthquake(
+            diff_content_panel_surface,
+            intensity_table_surface,
+            surface_data,
+            event_data,
         )
 
-        data_sheet = [
+        fmin, fmax = 0.05, 0.20
+
+        diff_content_panel_body, noise_body = zip(
+            *[change_amplitude(df, (fmin, fmax)) for df in content_panel]
+        )
+        regions_content_panel_body = [
+            group_dynamic(df) for df in diff_content_panel_body
+        ]
+
+        body_data = time_data[~time_data["phase"].isin(["love", "rayleigh"])]
+        intensity_table_body = correlations(
+            diff_content_panel_body, body_data, event_data
+        )
+
+        detection_table_body, association_table_body = detecting_earthquake(
+            diff_content_panel_body,
+            intensity_table_body,
+            body_data,
+            event_data,
+        )
+
+        data_sheet_surface = [
             content_panel,
-            diff_content_panel,
-            regions_content_panel,
-            time_data,
-            detection_table,
-            intensity_table,
-            association_table,
+            diff_content_panel_surface,
+            regions_content_panel_surface,
+            surface_data,
+            detection_table_surface,
+            intensity_table_surface,
+            association_table_surface,
+            event_data,
+        ]
+        data_sheet_body = [
+            content_panel,
+            diff_content_panel_body,
+            regions_content_panel_body,
+            body_data,
+            detection_table_body,
+            intensity_table_body,
+            association_table_body,
             event_data,
         ]
 
-        model_table = generate_model_table(data_sheet)
+        try:
+            model_table_surface = generate_model_table(
+                data_sheet_surface, noise_surface
+            )
+            model_table_body = generate_model_table(data_sheet_body, noise_body)
+        except KeyError:
+            return [], []
 
-        data_sheet = [
+        data_sheet_surface = [
             content_panel,
-            diff_content_panel,
-            regions_content_panel,
-            time_data,
-            detection_table,
-            intensity_table,
-            association_table,
+            diff_content_panel_surface,
+            regions_content_panel_surface,
+            surface_data,
+            detection_table_surface,
+            intensity_table_surface,
+            association_table_surface,
             event_data,
-            model_table,
+            model_table_surface,
+        ]
+        data_sheet_body = [
+            content_panel,
+            diff_content_panel_body,
+            regions_content_panel_body,
+            body_data,
+            detection_table_body,
+            intensity_table_body,
+            association_table_body,
+            event_data,
+            model_table_body,
         ]
 
         if plotting:
             plot_seismo(
                 content_panel,
-                diff_content_panel,
-                regions_content_panel,
+                diff_content_panel_surface,
+                regions_content_panel_surface,
+                time_data,
+            )
+            plot_seismo(
+                content_panel,
+                diff_content_panel_body,
+                regions_content_panel_body,
                 time_data,
             )
 
-            detection_table.plot.bar("event_id", "fraction_above_reference", rot=25)
+            detection_table_surface.plot.bar(
+                "event_id", "fraction_above_reference", rot=25
+            )
             plt.tight_layout()
             plt.show()
 
-        if saving:
-            save_excel(
-                content_panel,
-                diff_content_panel,
-                regions_content_panel,
-                time_data,
-                event_data,
-                detection_table,
-                intensity_table,
-                association_table,
-                model_table,
-                saving_path,
-            )
-
+        # if saving:
+        #     save_excel(
+        #         content_panel,
+        #         diff_content_panel_surface,
+        #         regions_content_panel_surface,
+        #         time_data,
+        #         event_data,
+        #         detection_table_surface,
+        #         intensity_table_surface,
+        #         association_table,
+        #         model_table,
+        #         saving_path,
+        #     )
     else:
         print(f"No earthquake detected in the data sheet {path[-10:-1]}")
-        return []
+        return [], []
 
-    return data_sheet
+    return data_sheet_surface, data_sheet_body
 
 
 if __name__ == "__main__":
     name_list = os.listdir("Data/sismic_data")
 
     path = "Data/sismic_data/"
-    response_data_sheet = []
 
     for i, name in enumerate(name_list):
-        data_sheet = create_analysis_panel(path + name)
-        response_data_sheet.append(data_sheet)
+        data_sheet_surface, data_sheet_body = create_analysis_panel(path + name)
         try:
             save_excel(
-                data_sheet[0],
-                data_sheet[1],
-                data_sheet[2],
-                data_sheet[3],
-                data_sheet[7],
-                data_sheet[4],
-                data_sheet[5],
-                data_sheet[6],
-                data_sheet[8],
-                "Data/" + name[0:-5] + "/resultado.xlsx",
+                data_sheet_surface[0],
+                data_sheet_surface[1],
+                data_sheet_surface[2],
+                data_sheet_surface[3],
+                data_sheet_surface[7],
+                data_sheet_surface[4],
+                data_sheet_surface[5],
+                data_sheet_surface[6],
+                data_sheet_surface[8],
+                "Data/" + name[0:-5] + "/Surface_resultado.xlsx",
             )
-            print(i + 1)
+            save_excel(
+                data_sheet_body[0],
+                data_sheet_body[1],
+                data_sheet_body[2],
+                data_sheet_body[3],
+                data_sheet_body[7],
+                data_sheet_body[4],
+                data_sheet_body[5],
+                data_sheet_body[6],
+                data_sheet_body[8],
+                "Data/" + name[0:-5] + "/Body_resultado.xlsx",
+            )
+            while True:
+                path_surface = "Data/" + name[0:-5] + "/Surface_resultado.xlsx"
+                path_body = "Data/" + name[0:-5] + "/Body_resultado.xlsx"
+                try:
+                    df_surface = pd.read_excel(path_surface, sheet_name=-1)
+                    df_body = pd.read_excel(path_body, sheet_name=-1)
+
+                    break
+                except BadZipFile:
+                    save_excel(
+                        data_sheet_surface[0],
+                        data_sheet_surface[1],
+                        data_sheet_surface[2],
+                        data_sheet_surface[3],
+                        data_sheet_surface[7],
+                        data_sheet_surface[4],
+                        data_sheet_surface[5],
+                        data_sheet_surface[6],
+                        data_sheet_surface[8],
+                        "Data/" + name[0:-5] + "/Surface_resultado.xlsx",
+                    )
+                    save_excel(
+                        data_sheet_body[0],
+                        data_sheet_body[1],
+                        data_sheet_body[2],
+                        data_sheet_body[3],
+                        data_sheet_body[7],
+                        data_sheet_body[4],
+                        data_sheet_body[5],
+                        data_sheet_body[6],
+                        data_sheet_body[8],
+                        "Data/" + name[0:-5] + "/Body_resultado.xlsx",
+                    )
+
+            print(f"{i + 1} / {len(name_list)}")
         except IndexError:
-            print(i + 1)
-            continue
+            try:
+                save_excel(
+                    data_sheet_body[0],
+                    data_sheet_body[1],
+                    data_sheet_body[2],
+                    data_sheet_body[3],
+                    data_sheet_body[7],
+                    data_sheet_body[4],
+                    data_sheet_body[5],
+                    data_sheet_body[6],
+                    data_sheet_body[8],
+                    "Data/" + name[0:-5] + "/Body_resultado.xlsx",
+                )
+                print(f"{i + 1} / {len(name_list)}")
+            except IndexError:
+                print(f"{i + 1} / {len(name_list)} - error in: {name}")
+                continue

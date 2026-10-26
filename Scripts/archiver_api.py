@@ -1,13 +1,34 @@
 import datetime
 import getpass
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 import matplotlib.pyplot as plt
 import pandas as pd
 import requests
-from constants import API_KEY, BASE_URL, MODEL_NAME, SYSTEM_PROMPT
+from constants import olog_constants
 from openai import OpenAI
+
+SYSTEM_PROMPT, BASE_URL, API_KEY, MODEL_NAME = olog_constants()
+
+
+def add_hours(timestamp, hours):
+    return (
+        datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%fZ") + timedelta(hours=hours)
+    ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+
+
+def sub_hours(timestamp, hours):
+    return (
+        datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%fZ") - timedelta(hours=hours)
+    ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+
+
+def seconds_between(from_time, to_time):
+    return (
+        datetime.strptime(from_time, "%Y-%m-%dT%H:%M:%S.%fZ")
+        - datetime.strptime(to_time, "%Y-%m-%dT%H:%M:%S.%fZ")
+    ).total_seconds()
 
 
 def get_archiver_data(
