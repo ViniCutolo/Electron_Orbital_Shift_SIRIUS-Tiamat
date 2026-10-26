@@ -3,7 +3,7 @@
 <img src="./assets/header.png"/>
 
 <p align="center">
-  <img src="./assets/shared image.png" alt="Header" />
+  <img src="./assets/shared image.png" alt="Header" width="200"/>
 </p>
 
 <h1 align="center">
