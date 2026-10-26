@@ -1,0 +1,166 @@
+id,version,owner,createdDate,eventStart,description,attachments,from,to
+34292,2,alex.cavalcante,1791606683000,1791579600000,"**Oscilaçôes no feixe devido a abalos sísmicos no Panamá**
+
+* **17:25**Os BPMs horizontais apresentaram oscilações peculiares de abalos sísmico (terremotos). Informações de sites especializados mostraram que ocorreram várias réplicas no Panamá a partir das 17h25 (horário de Brasília). Tais réplicas continuam a ocorrer comos vê no print da tela do site USGS, porém os BPMs detectaram apenas as réplicas entre 17h25 e 18h00. Os detectores de vibração (sismógrafos do Sirius) apresentam dados inconsistentes.","[{'fileName': 'QUAKE DETAILS.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 63847}, {'fileName': 'QUAKE_MAP.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 292784}, {'fileName': 'QUAKE_PAN.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 174305}]",2026-10-09T20:25:00.000000Z,2026-10-09T21:00:00.000000Z
+34291,1,vanusa.souza,1791580202000,1791580202000,"### **Turno de usuários**
+
+
+
+
+- 04h23: Ocorreu queda de feixe devido à desconexão do crate IA-06RaBPM-CO-CrateCtrl. Após identificação da falha, foi realizado acesso ao crate via terminal;
+- 06h00: Inicio de usuários;
+- 07h41: Devido a primeira queda do feixe [Archiver](https://ais-eng-srv-ta.cnpem.br/Olog/index.html#34286_1)não foi possível fechar o Loop do FOFB, por falha no racks de BPMs 5 e 7 ( Frame error count incrementando em dois controladores ).
+- Foram observados eventos de erro no Modulador 1, ocasionando variações nos pulsos e quedas da tensão de saída da Klystron 1 para zero.ocasionando falha de injeção para o Booster e Anel.
+- Foi realizada correção da sintonia horizontal e vertical utilizando a ferramenta SI/Optics/Tune Correction, com o objetivo de otimizar os valores de tune da máquina. 
+- Foi identificado uma perturbação na órbita do feixe, temporalmente associada à ocorrência de um terremoto de magnitude 7,7 no Panamá, registrado na sexta-feira, às 15:23:59.",[],2026-10-09T07:23:00.000000Z,2026-10-09T10:41:00.000000Z
+34284,4,wagner.bento,1791575366000,1791570239000,"#### Oscilação no feixe devido a ocorrencia de abalo Sismíco no Panamá
+
+
+Foi identificada uma perturbação na órbita do feixe, temporalmente associada à ocorrência de um terremoto de magnitude 7,7 no Panamá, registrado na sexta-feira, às 15:23:59.
+
+A ocorrência sísmica pode ter provocado vibrações resultando em oscilações na órbita do feixe. Como consequência da perturbação, foi observada a abertura do loop de correção lenta da órbita (Slow Orbit Feedback – SOFB).
+[Sismógrafo](https://archiver-viewer.lnls.br/?pvConfig=A4NwvA9sAuCWC2sBeBTAJgfQBwAYcAoBlASQFoBxAGwgCMBSAZgEEmAFUgYQFcAnH4gHYAzCIyYAZWEJRx4KAEKsAsgAkIvUkogCAlBgw8A5jQCG+HABoABJasBGAExZrdgHQ4dAMlCQYCZOjYeERkVLRibJy8-MKizJLSsihqGlq6+kam+ABstna41gDsAKwu7l4+ULIBmLgEJBTU9MyRhADyAGLyYuIQUITQJtAopIQolHoGxmYODLYOpVYlZR7e4FX+qLXBAEo7pDgAnIRihISjKLAAzvCkTAAedgynABqa2pOZZrY-KxXrfkQWyCBD2B2Op3OY2utweT1OAC13ukpllHM57E4XFj7OU1r5qsC6vgwUcTswzhcYXdHs8KQBNZGfabmFxzawOPB-TxCHgQeBgTkObKkOw4cEAFTshTExSwYgchVcYoYCM80AggpwwtF4qOUvlzDlCqVKrVPBQQi1OrFkvyYhwdgVh1cWEODgRQA)
+
+*Anexo gráfico até o momento da abertura do SOFB 15:13:37 hrs (quake_panama_091026).*","[{'fileName': 'Screenshot from 2026-10-09 16-23-11.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 209321}, {'fileName': 'Screenshot from 2026-10-09 16-17-24.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 377140}, {'fileName': 'Screenshot%20from%202026-10-09%2016-01-50.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 286652}, {'fileName': 'quake_panama_091026.pdf', 'contentType': 'application/pdf', 'thumbnail': False, 'fileSize': 7895808}]",2026-10-09T18:13:37.000000Z,2026-10-09T18:23:59.000000Z
+33387,2,vanusa.souza,1787257212000,1787257212000,"##### **Oscilaçôes no feixe- possível influência sísmica**
+
+- Foram observadas  oscilaçôes peculiares nos BPMs horizontais, com comportamento compatível com possíveis abalos sísmicos.  Durante a ocorrência, foi identificados em site especializado um terremoto de magnitude 6,7, com epicentro localizado no Peru, aproximadamente 23 km de profundidade, registrado por volta das 15h. As oscilações observadas nos BPMs podem estar relacionadas à atividade sísmica registrada no período. registros e capturas das oscilaçôes foram anexados para acompanhamento e análise.","[{'fileName': 'Screenshot from 2026-08-20 16-19-32.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 73806}, {'fileName': 'Screenshot from 2026-08-20 16-52-15.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 372011}, {'fileName': 'Screenshot from 2026-08-20 16-52-28.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 457911}, {'fileName': 'Screenshot 2026-08-20 at 17-01-35 Archiver Viewer.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 321839}, {'fileName': 'Screenshot 2026-08-20 at 17-01-04 Archiver Viewer.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 365420}, {'fileName': 'Screenshot%202026-08-20%20at%2017-49-23%20Archiver%20Viewer.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 240793}]",2026-08-20T18:00:00.000000Z,2026-08-20T20:00:00.000000Z
+33338,1,alex.cavalcante,1786782933000,1786752000000,"**Oscilaçôes no feixe devido a abalos sísmicos na Indonésia**
+
+Os BPMs horizontais apresentaram oscilações peculiares de abalos sísmicos. O terremoto ocorreu na Indonésia às 19h00 (horário de Brasília) e houve várias réplicas. ","[{'fileName': 'QUAKE_INDONESIA.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 159318}, {'fileName': 'quake_indonesia.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 28081}]",2026-08-15T22:00:00.000000Z,2026-08-16T00:00:00.000000Z
+33266,5,lucas.ransato,1786392909000,1786365268000,"**Terremoto na Colômbia - San José del Palmar, Chocó**
+
+
+
+
+
+
+
+
+
+No dia 10/08/26, foi registrado um evento sísmico de magnitude 7,4 na região de San José del Palmar, com epicentro aproximadamente 5km a leste da cidade. O evento ocorreu ás 07:34:28 no horário local da Colômbia (UTC-5), correspondendo a 09:34:28 horário de Brasília (UTC-3), com profundidade estimada de aproximadamente 110.3 km.
+	Durante o período do evento, foi acompanhado o comportamento das PV's do Sismógrafo:
+[Sismógrafo](https://archiver-viewer.lnls.br/?pvConfig=A4NwvA9sAuCWC2sBeBTAJgfQBwAYcAoAlQgWhwE4BlAUgGYBBSykylWAZ3hPoA8BGWnUYANEgFkIAOwCUGDACcA5gCMAhvhwAaAARbtfAExYdfAHQ5pAMlCQYCZOmx4ipCjQZMWbTt36CPAJriUrIKKuoAbHp8uDoA7ACsJuZWNlBwiKiYuATEZFRCnqwcXLwChQBawTJySmr4BrR6BknaickWlgBm8hDwYAY4BhFkWCR8OAAqhkK0WEI4EeZ4FZbQEANDIzhjE9P+9HMLS3g4q-IoXZst+SQtkzgJQgAsEUIGZuRYcRVAA)
+	
+**Observação:** Não foram identificadas alterações nos BPMs atribuíveis ao evento sísmico durante o período analisado. Ressalta-se, entretanto, que no momento da ocorrência do terremoto o Sirius encontrava-se em estudo de máquina e sem feixe, de modo que os BPMs não estavam realizando a medição da posição do feixe.
+	
+	
+
+
+	","[{'fileName': 'Screenshot from 2026-08-10 17-10-25.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 381247}, {'fileName': 'Screenshot%20from%202026-08-10%2017-11-33.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 188687}]",2026-08-10T12:34:28.000000Z,2026-08-10T14:34:28.000000Z
+33005,6,daniel.cantarani,1785241701000,1785241701000,"### Terremoto no Japão
+.
+- Por volta de 07h48 os BPMs apresentaram oscilações características de evento sísmico. As oscilações foram detectadas pelo sistema da máquina, Igor e Arquiver.
+Não houve abertura de loop do sistema de correção de órbita (SOFB/FOFB).
+Em anexo o gráfico, esse padrão é típico de uma excitação mecânica global do anel, e não de um problema localizado em um BPM específico, fonte ou circuito de aquisição.
+
+Pelas notícias desta terça-feira (28/07/2026), ocorreu um forte terremoto de magnitude 7,1 na região de Kumamoto, na ilha de Kyushu, sul do Japão.
+O terremoto ocorreu às 16:27 no horário local do Japão, equivalente a 07:27 UTC.
+
+Obs: Os dados do nosso Sismógrafo, no gráfico do Archiver, está com erros de leitura (blanks), e o Afonso está atuando na solução.
+[Sismógrafo (ACELERÔMETRO)](http://archiver-viewer.lnls.br/?pvConfig=A4NwvAShC0AMCcBlApAZgIKMdRBTAlgM4C206AHgIypqYCa0AsgPYB2A+uwE4DmARgEMAFADZYAGgAElABwTJAdgCsUygDpYASgBkoSDAQoMWHARJkqNYwA0mbTr0FD58ygCYZqjTr1Q4SWhM8IlIKakCALTsObn5hN1R5NxVFFPUtbQAzLmZiMDdYNxE4BWgPABV3WgAWK3QitQVKEQjtABdmfMLi2FKKqowlOoamlu0uXEyu5P8ypXLYJRqRWjd1eBkFCKA)
+","[{'fileName': 'SismÃ³grafo terremoto Japan.PNG', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 80952}, {'fileName': 'BPM terremoto japan.PNG', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 286449}, {'fileName': 'Screenshot from 2026-07-28 11-03-56.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 161337}]",2026-07-28T07:27:00.000000Z,2026-07-28T09:27:00.000000Z
+32807,2,wagner.bento,1784309897000,1784309897000,"**TERREMOTO - EVENTO SÍSMICO DETECTADO** 
+
+- Entre12h06 e 12h47, os BPMs do plano horizontais apresentaram oscilações características de evento sísmico. As oscilações foram detectadas pelo sistema da máquina, Igor e Arquiver vibrações sísmicas.
+O evento coincide com terremoto registrado no México, com magnitude aproximada de **7.3 58 km a oeste-sudoeste de Puerto Madero** .","[{'fileName': 'Screenshot from 2026-07-17 14-32-02.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 494087}, {'fileName': 'quake_170726.PNG', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 656000}]",2026-07-17T15:06:00.000000Z,2026-07-17T15:47:00.000000Z
+32454,6,carlos.vieira,1782374640000,1782374640000,"### Oscilações no feixe por Abalos Sísmicos
+'
+Os BPMs horizontais apresentaram oscilações peculiares de abalos sísmicos. O loop do SOFB abriu no período de maior variação como mostra o gráfico em anexo.
+O loop permaneceu aberto por ~5 minutos.
+
+De acordo com sites dedicados esse tipo de análise, esses abalos foram decorrentes ao terremoto registrado na Venezuela,a magnitude máxima registrada foi de 7.5 de acordo com o site como pode ser visto na imagem em anexo.
+
+
+[Sismógrafo_BPM_SOFB](http://archiver-viewer.lnls.br/?pvConfig=A4NwvA9sAuCWC2sBeBTAJgfQBwAYcAoAlQgWhwE4BlAUgGYBBSykylWAZ3hPoA8BGWnUYBNEgFkIAOwCUGDACcA5gCMAhvgBsOADQACPrj0B2AKx6+AOhzSAZKEgwEydNjxFSFGgyYs2nbvyC3gBa4lKyCirqAEy0OrrRZrqm5la29lBwiKiYuATEZFRCPqwcXLwCxQAaYTJySmr48fF80Vip1nbglACSJADiADYQykL0AAosAPIAYgBCQgAyEFCU0KrQKL6DcgDEJsoAxgBmxyhdYL2FYnxCACJ9c+NiQuMQ7DUSknsnJgAsf3OGUc2RceXwVxwfBu90ez1e70+4T2FAMKBMNmO8gg8DA0Rw0Q0ZCJ0T+ABVotEhHwNEJaFgLOR8cEbNAIHiCUScCTyZShH9aQx6YzmTZ5ChjhzCcSSKSKVSGHwjPzaBYjH8TMEgA).
+
+[BPMs_Hor_1_10](http://archiver-viewer.lnls.br/?pvConfig=A4NwvAygkgtADAFgLIEYCkBmAggEVgIQAUlMtCB7AZwA0YlyA7AfQBMBLAMw6aYCcBzAEYBDABRwANAAJJUlACYAHNJQA6OAEoAZKEiw4KVKTwwiJbBRp1GrTtz5CxANlkpFsgOwBWFeu27oeA8jbBMzUktaemZ2Lh4BEVF5DFl5HylvX00dcECUOBDcAmIIqiibWPsEsVlarP9c-QxCsJKLMusYu3jHUQVlOSUVIbk-HL14RRbi8zIO6Ns4h0TXFOl5OFcxgP0vadM2uasFyp7EtPT5NPX0tWyd+Cd98Pbjiu7lsRQPVK9bgE5bttGvB-s9DpFOosqr1+tI6qN7iC4PJwbNIScPtU+j8VPlpAgttkOLxyABbMAbeROR4weQIAAqV1IaVIBlUCG8AC0tAAXciUlE0uA0+lM+SkDBeNlqTleHm8ACmHEF1NpYvk6GwXkUpBQdzgii5QA).
+","[{'fileName': 'image_1782374640200.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 356290}, {'fileName': 'image_1782374640551.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 389767}, {'fileName': 'image_1782376649209.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 315527}, {'fileName': 'image_1782378620817.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 422333}]",2024-06-26T22:46:38.000000Z,2024-06-27T00:46:38.000000Z
+32189,3,alex.cavalcante,1780908433000,1780880400000,"**Oscilaçôes no feixe por abalos sísmicos**
+
+Os BPMs horizontais apresentaram oscilações peculiares de abalos sísmcos. Em site especializado no assunto, identificamos vários terremotos nas Filipinas entre 07h37 e 09h37  (20h37 a 22h37 no horário de Brasília). As PVs do acelerômetro do Sirius estavam travadas no momento das ocorrências.
+
+","[{'fileName': 'quake0706.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 53406}]",2026-06-08T23:37:00.000000Z,2026-06-09T01:37:00.000000Z
+30916,4,wagner.bento,1774000537000,1773972000000,"#### Oscilaçôes no feixe por abalos sísmicos
+Os BPMs horizontais apresentaram oscilações peculiares. Em site especializado no assunto, identificamos terremotos ocorridos próxim à Argentina às 21h22 e 22h15 (horário de Brasília).","[{'fileName': 'quake.PNG', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 23354}, {'fileName': 'QUAKE2.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 77957}]",2026-03-21T00:22:00.000000Z,2026-03-21T01:15:00.000000Z
+30766,5,vanusa.souza,1773419114000,1773419113000,"##### **TERREMOTO - EVENTO  SÍSMICO DETECTADO **
+
+
+- Entre 10h49  e 10h55, os BPMs do plano horizontais apresentaram oscilações características de evento sísmico.
+- As oscilações foram detectadas pelo sistema da máquina, Igor e Arquiver  vibrações sísmicas.
+- O evento  coincide com** terremoto registrado no Chile**, com magnitude aproximada de **6.5 Mw**, perceptével nos sinais do sistema.
+-
+
+
+[Terremoto](https://www.sismologia.cl/sismicidad/informes/2026/03/351236.html)","[{'fileName': 'Capturar.PNG', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 259628}, {'fileName': 'Screenshot 2026-03-13 at 11-54-58 Archiver Viewer.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 238591}, {'fileName': 'Screenshot 2026-03-13 at 11-53-15 Archiver Viewer.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 244101}, {'fileName': 'Screenshot 2026-03-13 at 11-50-57 Archiver Viewer.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 237082}, {'fileName': 'Screenshot%20from%202026-03-13%2013-38-30.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 955393}]",2026-03-13T13:49:00.000000Z,2026-03-13T13:55:00.000000Z
+28551,4,alex.cavalcante,1758779994000,1758772800000,"## Terremoto 2 (Venezuela)
+Novo terremoto na Venezuela. Os bpms responderam após 25 minutos, mas as PVs do acelerômetro do Sirius captaram os tremores a partir de 00h58. Infelizmente, as PVs do acelerômetro estão perdendo dados de leitura de forma aleatória e não registrou dados no exato momento da oscilação nos BPMs, porém, ao retomar as leituras, observou-se uma continuidade de vibrações nos acelerômetros.
+
+","[{'fileName': 'Screenshot 2025-09-25 at 03-32-14 Archiver Viewer.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 375318}, {'fileName': 'quake_bpms_00h51.PNG', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 148027}, {'fileName': 'QUAKE_00h51.PNG', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 162867}]",2025-09-25T03:58:00.000000Z,2025-09-25T05:58:00.000000Z
+28549,3,alex.cavalcante,1758758030000,1758753722000,"## Terremoto (Venezuela)
+Os BPMs apresentaram oscilações peculiares. Em site especializado no assunto, identificamos um terremoto considerado muito forte ocorrido na Venezuela às 22h21 (horário UTC), 19h21 (horário de Brasília). As PVs do acelerômetro do Sirius captaram parcialmente esse abalo, pois as leituras estavam travadas entre 19:18h e 19h42.","[{'fileName': 'quakeVen.PNG', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 232815}, {'fileName': 'quake2409.PNG', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 129100}, {'fileName': 'QUAKE_BPMS.PNG', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 168741}, {'fileName': 'QUAKE.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 34491}]",2025-09-24T22:18:00.000000Z,2025-09-24T22:42:00.000000Z
+28375,1,alex.cavalcante,1757758631000,1757736840000,"Entre 00h52 e 01h15, os BPMs horizontais apresentaram oscilações características de eventos sísmicos. Observando a leitura do acelerômetro do Sirius evidenciou-se pequenas instabilidades. Houve um terremoto considerado leve ocorrido no Peru.","[{'fileName': 'Screenshot 2025-09-13 at 06-59-27 Archiver Viewer.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 505040}, {'fileName': 'Screenshot 2025-09-13 at 04-47-39 Painel Global - Boletim de atividades sÃ\xadsmicas em Tempo Real.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 17796}]",2025-09-13T03:52:00.000000Z,2025-09-13T04:15:00.000000Z
+28009,5,vanusa.souza,1755834161000,1755834160000,"- Entre 23h30 e 23h55, os BPMs horizontais apresentaram oscilações características de eventos sísmicos. 
+- Bem próximo do horário (23h16), houve um terremoto de grande amplitude na Argentina.","[{'fileName': 'Screenshot 2025-08-22 at 00-37-13 Archiver Viewer.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 529054}, {'fileName': 'Screenshot%20from%202025-08-22%2000-38-00.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 1101533}, {'fileName': 'terremoto1.PNG', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 19710}]",2025-08-23T02:16:00.000000Z,2025-08-23T02:55:00.000000Z
+27663,2,wagner.bento,1753848445000,1753839300000,"Durante os estudos de máquina, pessoal do grupo FAC, observaram oscilações na órbita horizontal do feixe, em seguida observamos oscilações sísmicas nas PVs do acelerômetro do Sirius. Acreditamos estar relacionado com os terremotos ocorridos na Guatemala (anexo).
+
+Link Archiver: *http://archiver-viewer.lnls.br/?pv=RR-09S%3ASS-Seism-Ax13%3ASZ-Mon__rgba(0,%200,%20128,%201.0)&pv=SI-09C1%3ADI-BPM-1%3APosX-Mon__rgba(60,%20180,%2075,%201.0)&from=2025-07-30T01%3A36%3A01.597Z&to=2025-07-30T01%3A46%3A01.597Z&ref=2025-07-30T03%3A56%3A11.075Z*
+
+Fonte: *https://www.dadosmundiais.com/terremotos.php*","[{'fileName': 'Screenshot from 2025-07-30 01-05-49.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 18011}, {'fileName': 'Screenshot from 2025-07-30 00-35-38.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 75353}, {'fileName': 'Screenshot%20from%202025-07-30%2000-35-01.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 177179}]",2025-07-30T04:36:01.597000Z,2025-07-30T04:46:01.597000Z
+27213,3,vanusa.souza,1751110563000,1751110563000,"Houve pertubações nos BPMs do Anel nos planos X , bem próximo do horário (05h32), houve um terremoto de grande amplitude na Argentina.","[{'fileName': 'Screenshot%20from%202025-06-28%2008-03-43.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 816832}, {'fileName': 'TERREMOTO ARGENTINA.PNG', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 18088}, {'fileName': 'Screenshot 2025-06-28 at 14-50-04 Archiver Viewer.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 142642}]",2025-06-28T08:32:00.000000Z,2025-06-28T10:32:00.000000Z
+26531,3,wagner.bento,1746213283000,1746190680000,"Tivemos pequenas pertubações na órbita do feixe de elétrons, nos dois planos, que pela assinatura, a causa parece ter sido terremotos, o horário coincide com um grande abalo sismico que ocorreu na Argentina (09h58, horário de Brasilia). infelizmente o serviço do nosso sismografo ainda está off line e não conseguimos confirmar através das PVs dele. O horário também coincide com movimentações do ondulador da linha Ipe (APU58), porém não deve ter sido a causa.
+
+Link sismografo da internet: *https://apolo11.com/noticias.php?t=Forte_terremoto_atinge_Argentina_a_219_km_de_Ushuaia&id=20250502-102212*
+
+Link Archiver BPM X: *http://archiver-viewer.lnls.br/?pv=SI-09C1%3ADI-BPM-2%3APosX-Mon__rgba(0,%200,%20128,%201.0)&pv=SI-11SP%3AID-APU58%3APhase-Mon__rgba(60,%20180,%2075,%201.0)&from=2025-05-02T13%3A02%3A10.500Z&to=2025-05-02T14%3A02%3A10.500Z&ref=2025-05-02T19%3A02%3A54.724Z*
+
+Link Archiber BPM Y: *http://archiver-viewer.lnls.br/?pv=SI-11SP%3AID-APU58%3APhase-Mon__rgba(60,%20180,%2075,%201.0)&pv=SI-13C3%3ADI-BPM-2%3APosY-Mon__rgba(128,%20128,%20128,%201.0)&from=2025-05-02T13%3A02%3A10.500Z&to=2025-05-02T14%3A02%3A10.500Z&ref=2025-05-02T19%3A02%3A54.724Z*
+
+Link Archiver RF Freq.: *http://archiver-viewer.lnls.br/?pv=SI-13C3%3ADI-BPM-1%3APosX-Mon__rgba(128,%20128,%20128,%201.0)&pv=RF-Gen%3AGeneralFreq-RB__rgba(60,%20180,%2075,%201.0)&from=2025-05-02T13%3A02%3A10.500Z&to=2025-05-02T14%3A02%3A10.500Z&ref=2025-05-02T19%3A02%3A54.724Z*
+","[{'fileName': 'Screenshot from 2025-05-02 16-16-20.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 736645}]",2025-05-02T13:02:10.500000Z,2025-05-02T14:02:10.500000Z
+26528,4,wagner.bento,1746195497000,1746195497000,"### Turno de Usuários:
+'
++ **09h45:** Terremoto na Argentina, ocorreram pertubações principalmente na órbita horizontal do feixe de elétrons.
++ **10h33:** Rampa do Booster falhou, reenviamos a configuração *flip*;
++ **10h56:** Pessoal da Manserv e técnico da Grundfus, desligaram o fan coil do Linac para manutenção da IHM do sistema;
++ **12h00:** Fan coil do Linac voltou a operar normalmente;
++ **12h30:** Fan coils do Hall sofreram variações devido a falha do fan coil do Linac (anexo);
++ **14h00:** Ajuste de tensão no septa fino de injeção de + 0.4 V (*TS-04:PU-InjSeptF:Voltage-Mon*), melhora a eficiência no Anel.","[{'fileName': 'Screenshot from 2025-05-02 12-27-17.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 117094}]",2025-05-02T12:45:00.000000Z,2025-05-02T17:00:00.000000Z
+25307,4,carlos.vieira,1739074035000,1739074035000,"### Pertubações na órbita Horizontal e Vertical
+'
+Houve pertubações em todos os BPMs do Anel nos planos X e Y como mostra a figura em anexo.
+O evento ocorreu próximo do horário ~20h40.
+Às 20h23 houve um terremoto de grande magnitude (7.7 na escala richter ) próximo a Cuba que foi sentido em alguns países da America do Sul.
+Pode ter alguma relação com o registro.
+Infelizmente nosso sismógrafo, mais uma vez estava desconectado (desde o dia 20/01/25), não sendo possível comparar os dados.","[{'fileName': 'BPMs.jpg', 'contentType': 'image/jpeg', 'thumbnail': True, 'fileSize': 559328}, {'fileName': 'image_1739074036410.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 191483}, {'fileName': 'image_1739074227948.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 103481}, {'fileName': 'BPMs_2.jpg', 'contentType': 'image/jpeg', 'thumbnail': True, 'fileSize': 157750}]",2025-02-09T23:23:00.000000Z,2025-02-09T23:40:00.000000Z
+24692,3,alex.cavalcante,1734167413000,1734133273000,"Entre 20h43 e 21h00, os BPMs horizontais apresentaram oscilações características de eventos sísmicos. Observando a leitura do acelerômetro do Sirius tivemos a confirmação. Então, ao buscar em site especializado no assunto, identificamos um terremoto considerado muito forte ocorrido no Chile às 23h38 (horário UTC), 08h38 (horário de Brasília).","[{'fileName': 'earthquake.jpg', 'contentType': 'image/jpeg', 'thumbnail': True, 'fileSize': 92296}, {'fileName': 'Captura de tela 2024-12-13 215614.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 72218}]",2024-12-13T23:43:00.000000Z,2024-12-14T00:00:00.000000Z
+22946,4,wagner.bento,1721360690000,1721354100000,"Houve pertubações nos [**BPMs**](https://ais-eng-srv-ta.cnpem.br/archiver-viewer/?pv=SI-09C1%3ADI-BPM-1%3APosX-Mon&pv=SI-09C1%3ADI-BPM-2%3APosY-Mon&from=2024-07-19T01%3A54%3A13.886Z&to=2024-07-19T01%3A59%3A13.886Z&ref=2024-07-19T02%3A17%3A46.561Z) do Anel nos planos X e Y, bem próximo do horário (22h55), às 22h50 houve um terremoto de grande amplitude no Chile e foi relatado em algumas cidades do Brasil também. Infelizmente nosso [sismógrafo](http://ais-eng-srv-ta.cnpem.br/archiver-viewer/index.html?pv=RR-09S%3ASS-Seism-Ax13%3ASY-Mon&pv=RR-09S%3ASS-Seism-Ax13%3ASZ-Mon&pv=RR-09S%3ASS-Seism-Ax13%3ASX-Mon&from=2024-07-18T23%3A59%3A43.550Z&to=2024-07-19T01%3A59%3A43.550Z&ref=2024-01-29T10%3A20%3A51.356Z), mais uma vez estava desconectado, fiz um update no IOC pelo Portainer porém sem sucesso.
+
+[**Link UOL**](https://noticias.uol.com.br/cotidiano/ultimas-noticias/2024/07/18/terremoto-sao-paulo-sismo.htm)","[{'fileName': 'Sis_Chile_BPMs_OrbXY_180724.JPG', 'contentType': 'image/jpeg', 'thumbnail': True, 'fileSize': 121646}, {'fileName': 'Orb_XY_180724.pdf', 'contentType': 'application/pdf', 'thumbnail': False, 'fileSize': 7540059}, {'fileName': 'Sis_Chile2_180724.JPG', 'contentType': 'image/jpeg', 'thumbnail': True, 'fileSize': 38973}]",2024-07-19T01:54:13.886Z,2024-07-19T01:59:13.886Z
+22785,2,alex.cavalcante,1719656186000,1719645720000,"Entre 04h22 E 04h28  alguns setores de bpms horizontais apresentaram oscilações características de eventos sísmicos. Infelizmente as PVs do sismógrafo do prédio estão sem leitura desde ontem, não sendo possível associar. No entanto, houve um terremoto no Peru ocorrido às 07:22 (UTC), 02:22 (Peru -Lima), 04:22 (Brasil -SP) que coincide com as vibrações nos bpms.
+
+
+Fonte: https://www.apolo11.com/terremotos.php","[{'fileName': 'Captura de tela 2024-06-29 071429.jpg', 'contentType': 'image/jpeg', 'thumbnail': True, 'fileSize': 180378}, {'fileName': 'Captura de tela 2024-06-29 071106.jpg', 'contentType': 'image/jpeg', 'thumbnail': True, 'fileSize': 197182}]",2024-06-29T07:22:00.000000Z,2024-06-29T07:28:00.000000Z
+29076,2,wagner.bento,1761955456000,1761936446000,"Houve um pequeno abalo sísmico, os [**BPMs do plano horizontal**](http://archiver-viewer.lnls.br/?pvConfig=A4NwvAShC0AMCcBlApAZgIKMdRBTAlgM4C206AHgIypqYBa0AsgPYB2A+uwE4DmARgEMAFACZUsADQACEQFZpAdnlTKAOlgBKAGShIMBCgxYcBEmSo0jADSZtOvQUMlTnlEQA5pazTvBQ4SLTGeESkFNRBAJq2HNz8wgBsru7OSl7q2rqIAJLQlAkAwgAstAAiuQBCAAqMtFXMhDYssQDE8LLwqPCUWgBmXMzEYCKwcnmw0KiUACqU7rRFCbRuqqioRXRaAC7Mw6Oy45Mzc7SylMsiq+ubXLi9e2MI0HLTsLILSxgiavDuCnRAA) sofreram pequenas pertubações. Poderia estar relacionado a um evento no sul do Panama (anexo).","[{'fileName': 'Screenshot%20from%202025-10-31%2021-00-00.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 338994}, {'fileName': 'Screenshot from 2025-10-31 20-52-11.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 198062}, {'fileName': 'Screenshot from 2025-11-01 02-44-54.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 137069}]",2025-10-31T18:51:12.000000Z,2025-10-31T20:51:12.000000Z
+28472,3,walter.junior,1758388544000,1758225900000,"## Anotação tardia##
+Segue em anexo, gráficos com monitores de posição capturando evento sismico na Argentina (Mendoza). 
+Aproveitamos para identificar alguns BPMs com nível de sinal ruído alto, oscilações e indiferentes aos semelhantes.
+Os BPMs com tag foram reposicionados (offset vertical) para dar destaque na imagem.","[{'fileName': 'Screenshot%20from%202025-09-20%2014-01-53.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 902226}]",2025-09-18T19:00:00.000000Z,2025-09-18T23:00:00.000000Z
+27665,6,wagner.bento,1753850224000,1753850224000,"### Turno de Estudos de Máquina:
+'
++ **19h02:** Desligamos o standby do **septum** de injeção no Booster para teste de eficiência de injeção;
++ **19h22:** Desligamos o standby do **kicker** de injeção no Booster para teste de eficiência de injeção;
++ **22h00:** Estão ocorrendo medidas de correção automática das sintonias betatron, através de um script pelo Jupyter, pela manhã iremos interromper o script para os preparitivos para o turno de Usuários;
++ **23h00:** Oscilações horizontais na órbita do feixe provocadas por abalos sísmicos;
++ **23h50:** Abrimos a linha SAPE, a pedido do Sr. Paulo de Tarso;
++ **30/07 - 05h30:** Fechamos o loop do FOFB;
++ **05h32:** Ligamos o standby do **septum** de injeção no Booster;
++ **06h00:** Interrompemos o script de correção automática das sintonias betatron;
++ **06h20:** Ligamos o standby do **kicker** de injeção no Booster.",[],2025-07-30T22:02:00.000000Z,2025-07-30T09:20:00.000000Z
+24582,2,wagner.bento,1733434240000,1733434239000,"Observamos pequenas pertubações nos dois planos da órbita do feixe, por poucos minutos não coincidem com um também pequeno, abalo sísmico.","[{'fileName': 'sisimografo_051224.pdf', 'contentType': 'application/pdf', 'thumbnail': False, 'fileSize': 907650}, {'fileName': 'Screenshot from 2024-12-05 18-04-09.png', 'contentType': 'image/png', 'thumbnail': True, 'fileSize': 171205}]",2024-12-05T19:00:00.000000Z,2024-12-05T23:00:00.000000Z
+22953,1,wagner.bento,1721363213000,1721363213000,"### Turno de Operação:
+'
++ **21h00:** Reboot no computador *LNLS210-LINUX (TV - Medidores VAC)*;
++ **21h06:** Abertura do loop do SOFB;
++ **22h50:** Abalo sísmico no Chile **provavelmente** (supostamente) afetou a órbita do feixe;
++ **23h06:** Update no IOC do sismógrafo pelo Portainer, sem sucesso.",[],2024-07-20T00:00:00.000000Z,2024-07-20T02:06:00.000000Z
