@@ -40,7 +40,7 @@ This project aims to investigate a possible correlation between shifts in the el
 ``pip install -r requirements.txt``
 
 4. Go to ``Scripts`` and run the files in this order:
-- archiver_api.py
+- api.ipynb
 - data_treatment.py
 - seismo_detection.py
 
