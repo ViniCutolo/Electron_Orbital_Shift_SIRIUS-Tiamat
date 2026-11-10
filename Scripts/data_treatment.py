@@ -15,7 +15,6 @@ from association_v2 import (
     event_blocks,
     null_calibration,
 )
-from fast_score import fast_association_calculator
 from obspy import taup
 from obspy.clients.fdsn.header import FDSNNoDataException
 from scipy.signal import butter, hilbert, sosfiltfilt
