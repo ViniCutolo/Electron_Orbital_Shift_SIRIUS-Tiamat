@@ -44,6 +44,18 @@ This project aims to investigate a possible correlation between shifts in the el
 - data_treatment.py
 - seismo_detection.py
 
+## About api.ipynb
+
+This project uses data logs from <CNPEM>'s Sirius</CNPEM> particle accelerator. If you are outside the CNPEM network, the notebook may return an error when attempting to access the seismic data files.
+
+To use the notebook in another environment, modify the script so that it retrieves seismometer data from your own institution or local data source. For information on the expected file structure, please refer to `seism_data.xlsx` in seism_data as a template.
+
+## Credits
+
+The `GDM52_program` module is not my original work. It was developed by Göran Ekström and is available through the Lamont-Doherty Earth Observatory, Columbia University project page:
+
+https://www.ldeo.columbia.edu/~ekstrom/Projects/SWP/GDM52.html
+
 ## Contents:
 
 <ul>
